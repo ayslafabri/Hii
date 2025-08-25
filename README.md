@@ -1,26 +1,27 @@
-const addTaskBtn = document.getElementById('add-task');
-const taskInput = document.getElementById('task-input');
-const taskList = document.getElementById('task-list');
+const botaoAdicionar = document.getElementById('add-task');
+const inputTarefa = document.getElementById('task-input');
+const listaTarefas = document.getElementById('task-list');
 
-addTaskBtn.addEventListener('click', addTask);
-taskInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') addTask();
+botaoAdicionar.addEventListener('click', adicionarTarefa);
+inputTarefa.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') adicionarTarefa();
 });
 
-function addTask() {
-    const taskText = taskInput.value.trim();
-    if (taskText === '') return;
+function adicionarTarefa() {
+    const textoTarefa = inputTarefa.value.trim();
+    if (textoTarefa === '') return;
 
     const li = document.createElement('li');
-    li.textContent = taskText;
+    li.textContent = textoTarefa;
 
-    const removeBtn = document.createElement('button');
-    removeBtn.textContent = '❌';
-    removeBtn.onclick = () => li.remove();
+    const botaoRemover = document.createElement('button');
+    botaoRemover.textContent = '❌';
+    botaoRemover.onclick = () => li.remove();
 
-    li.addEventListener('click', () => li.classList.toggle('completed'));
-    li.appendChild(removeBtn);
+    // Marcar como concluída ao clicar na tarefa
+    li.addEventListener('click', () => li.classList.toggle('concluida'));
 
-    taskList.appendChild(li);
-    taskInput.value = '';
+    li.appendChild(botaoRemover);
+    listaTarefas.appendChild(li);
+    inputTarefa.value = '';
 }
